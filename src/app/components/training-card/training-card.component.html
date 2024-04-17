@@ -13,7 +13,7 @@
     <div class="hidden sm:block sm:basis-56">
       <img
         alt=""
-        src="https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+        src="https://www.crossfitanteus.com/wp-content/uploads/2020/05/Crossfit-imagen-menu-1.jpg"
         class="aspect-square h-full w-full object-cover"
       />
     </div>
@@ -22,15 +22,27 @@
       <div class="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
         <a href="#">
           <h3 class="font-bold uppercase text-gray-900">
-            Título del entreno
+            {{workout?.name}}
           </h3>
         </a>
   
+        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 font-extrabold">
+          Movimientos:
+        </p>
         <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
-          pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis
-          quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius
-          atque dignissimos. Molestias explicabo corporis voluptatem?
+          {{workout?.workoutMovements}}
+        </p>
+        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 font-extrabold">
+          Intensidad:
+        </p>
+        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+          {{workout?.intensity}}
+        </p>
+        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 font-extrabold">
+          Mi resultado:
+        </p>
+        <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+          Aqui va resultado
         </p>
       </div>
   

@@ -1,6 +1,10 @@
 <div class="m-2">
-    @if (workouts | async; as allWorkout) {
-    @for (workout of allWorkout; track workout.id) {}
-    <app-training-card >{{workouts}}</app-training-card>
+    @if(workouts | async; as allWorkouts){     
+            @for (workout of allWorkouts; track workout.id) {
+                <app-training-card [workout]="workout"></app-training-card>
+            }
+
     }
+    <p></p>
+
 </div>

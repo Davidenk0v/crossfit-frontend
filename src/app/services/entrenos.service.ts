@@ -14,10 +14,9 @@ export class EntrenosService {
   errorMessage?:string;
 
   getAllWorkout(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(`${evironment.urlApi}/workouts/`).pipe(
+    return this.http.get<Workout[]>(`${evironment.urlApi}/workouts/`)
+    .pipe(
       catchError((error: HttpErrorResponse) => {
-        this.errorMessage = '';
-
         if (error.error instanceof ErrorEvent) {
           this.errorMessage = `Error: ${error.error.message}`;
         } else {

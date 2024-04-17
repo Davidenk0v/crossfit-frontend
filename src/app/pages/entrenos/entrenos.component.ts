@@ -3,17 +3,18 @@ import { TrainingCardComponent } from '../../components/training-card/training-c
 import { EntrenosService } from '../../services/entrenos.service';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { Workout } from '../../interfaces/Workout';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-entrenos',
   standalone: true,
-  imports: [TrainingCardComponent],
+  imports: [AsyncPipe, TrainingCardComponent],
   templateUrl: './entrenos.component.html',
   styleUrl: './entrenos.component.css'
 })
 export class EntrenosComponent {
 
-  constructor(private workoutService:EntrenosService, ){}
+  constructor(private workoutService:EntrenosService){}
 
   errorMessage?:string;
   workouts?: Observable<Workout[]>;
@@ -23,6 +24,6 @@ export class EntrenosComponent {
               .pipe(catchError((error:string)=> {
                 this.errorMessage = error;
                 return EMPTY;
-              }))
+              }));
   }
 }
