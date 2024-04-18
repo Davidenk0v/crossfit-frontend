@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/auth/login.service';
 import { LoginRequest } from '../../../interfaces/LoginRequest';
+import { ErrorMessageComponent } from '../../../components/alerts/error-message/error-message.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ErrorMessageComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

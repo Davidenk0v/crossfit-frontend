@@ -8,30 +8,32 @@
       <div class="flex flex-1 items-center justify-end md:justify-between">
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-sm">
+            @if(userLoginOn){
             <li>
               <a class="text-white transition hover:text-gray-500/75" href="/mis-entrenos"> Mis entrenos </a>
             </li>
   
             <li>
-              <a class="text-white transition hover:text-gray-500/75" href="#"> Mi datos </a>
+              <a class="text-white transition hover:text-gray-500/75" href="/mis-datos"> Mi datos </a>
             </li>
-  
-            <li>
-              <a class="text-white transition hover:text-gray-500/75" href="/usuarios"> Usuarios </a>
-            </li>
-  
-            <li>
-              <a class="text-white transition hover:text-gray-500/75" href="#"> Movimientos </a>
-            </li>
-  
-            <li>
-              <a class="text-white transition hover:text-gray-500/75" href="#"> Resultados </a>
-            </li>
-          </ul>
+            @if(admin){
+
+              
+              <li>
+                <a class="text-white transition hover:text-gray-500/75" href="/usuarios"> Usuarios </a>
+              </li>
+              
+              <li>
+                <a class="text-white transition hover:text-gray-500/75" href="/movimientos"> Movimientos </a>
+              </li>
+            }
+  }
+  </ul>
         </nav>
   
         <div class="flex items-center gap-4">
           <div class="sm:flex sm:gap-4">
+            @if(!userLoginOn){
             <a
               class="block rounded-md bg-white px-5 py-2.5 text-sm font-medium text-black transition  hover:text-gray-600/75 sm:block"
               href="/login"
@@ -45,6 +47,15 @@
             >
               Register
             </a>
+          }@else {
+
+            <button
+            class="hidden rounded-md bg-white px-5 py-2.5 text-sm font-medium text-red-700 transition hover:text-red-600/75 sm:block"
+            (click)="logout()"
+            >
+            Cerrar Sesión
+          </button>
+        }
           </div>
   
           <button

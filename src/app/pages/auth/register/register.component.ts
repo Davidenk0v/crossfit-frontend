@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../../services/auth/register.service';
 import { RegisterRequest } from '../../../interfaces/RegisterRequest';
+import { ErrorMessageComponent } from '../../../components/alerts/error-message/error-message.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ErrorMessageComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -27,14 +28,12 @@ export class RegisterComponent {
   });
 
   register() {
-    console.log(this.registerForm.value.username)
     if(this.registerForm.value.password === this.registerForm.value.password2){
     if (this.registerForm.valid) {
       this.registerService
         .register(this.registerForm.value as RegisterRequest)
         .subscribe({
           next: (userData) => {
-            console.log(userData);
           },
           error: (errorData) => {
             this.errorMessage = errorData;

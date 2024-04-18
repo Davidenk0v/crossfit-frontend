@@ -4,6 +4,9 @@ import { EntrenosService } from '../../services/entrenos.service';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { Workout } from '../../interfaces/Workout';
 import { AsyncPipe } from '@angular/common';
+import { JwtDecodeService } from '../../services/jwt-decode.service';
+import { JwtPayload } from '../../interfaces/JwtPayload';
+import { User } from '../../interfaces/User';
 
 @Component({
   selector: 'app-entrenos',
@@ -14,12 +17,15 @@ import { AsyncPipe } from '@angular/common';
 })
 export class EntrenosComponent {
 
-  constructor(private workoutService:EntrenosService){}
+  constructor(private workoutService:EntrenosService, private jwtService:JwtDecodeService){}
 
   errorMessage?:string;
   workouts?: Observable<Workout[]>;
+  decodeToken?:JwtPayload;
+  user?:User;
 
   ngOnInit(): void {
+    
     this.workouts = this.workoutService.getAllWorkout()
               .pipe(catchError((error:string)=> {
                 this.errorMessage = error;

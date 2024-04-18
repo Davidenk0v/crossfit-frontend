@@ -31,10 +31,9 @@ export class UsersComponent {
   }
 
   deleteUserById(id: number) {
-    console.log('eliminar');
     this.userService.deleteUser(id).subscribe({
       next: (response) => {
-        this.successMessage = response; //Revisar
+        this.successMessage = response.OK;
       },
       error: (errorData) => {
         this.errorMessage = errorData;

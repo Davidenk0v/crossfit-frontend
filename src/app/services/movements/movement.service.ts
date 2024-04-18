@@ -1,18 +1,22 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { User } from '../../interfaces/User';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { evironment } from '../../../environment/environment';
+import { Movement } from '../../interfaces/Movement';
+import { NewMovementRequest } from '../../interfaces/NewMovementRequest';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class MovementService {
+
+  private dataSubject = new BehaviorSubject<string>('');
+  sharedData = this.dataSubject.asObservable();
 
   constructor(private http:HttpClient) { }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${evironment.urlApi}/users/`).pipe(
+  getAllMovements(): Observable<Movement[]> {
+    return this.http.get<Movement[]>(`${evironment.urlApi}/movements/`).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
 
@@ -27,8 +31,8 @@ export class UsersService {
     );
   }
 
-  deleteUser(id: number): Observable<any> {
-    return this.http.delete<any>(`${evironment.urlApi}/users/${id}`).pipe(
+  deleteMovement(id: number): Observable<any> {
+    return this.http.delete<any>(`${evironment.urlApi}/movements/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
 
@@ -43,10 +47,11 @@ export class UsersService {
     );
   }
 
-  getUserInfo(username:string): Observable<any> {
-    return this.http.get<User>(`${evironment.urlApi}/users/username/${username}`).pipe(
+  addMovement(credentials:NewMovementRequest): Observable<any> {
+    return this.http.post<any>(`${evironment.urlApi}/movements/`, credentials).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
+
         if (error.error instanceof ErrorEvent) {
           errorMessage = `Error: ${error.error.message}`;
         } else {
@@ -57,4 +62,10 @@ export class UsersService {
       })
     );
   }
+
+  updateData(value: string) {
+    this.dataSubject.next(value);
+  }
+
+  
 }

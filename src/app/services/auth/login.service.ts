@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
 import { LoginRequest } from '../../interfaces/LoginRequest';
 import { evironment } from '../../../environment/environment';
+import { jwtDecode } from 'jwt-decode';
+import { JwtPayload } from '../../interfaces/JwtPayload';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class LoginService {
 
   
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currentUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentToken: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private http:HttpClient, private router:Router) {
@@ -25,6 +28,13 @@ export class LoginService {
         sessionStorage.setItem("token", userData.token);
         this.currentToken.next(userData.body);
         this.currentUserLoginOn.next(true);
+        if(this.currentToken.value){
+          let token = this.currentToken.value;
+          const {authorities} = jwtDecode(token) as JwtPayload;
+          if(authorities == 'ROLE_ADMIN'){
+            this.currentUserAdmin.next(true);
+          }
+        }
       }),
       map((userData)=> userData),
       catchError(this.handleError)
@@ -34,7 +44,7 @@ export class LoginService {
   logout(){
     sessionStorage.removeItem("token");
     this.currentUserLoginOn.next(false);
-    this.router.navigateByUrl('/inicio')
+    this.router.navigateByUrl('/login')
   }
 
 

@@ -1,22 +1,21 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Category } from '../../interfaces/Category';
 import { Observable, catchError, throwError } from 'rxjs';
-import { evironment } from '../../environment/environment';
-import { Workout } from '../interfaces/Workout';
-import { UsersService } from './user/users.service';
-import { JwtDecodeService } from './jwt-decode.service';
+import { evironment } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EntrenosService {
+export class CategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http:HttpClient) { }
 
   errorMessage?:string;
 
-  getAllWorkout(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(`${evironment.urlApi}/workouts/`)
+
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${evironment.urlApi}/categories/`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
@@ -29,5 +28,4 @@ export class EntrenosService {
       })
     );
   }
-
 }

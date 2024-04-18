@@ -4,6 +4,9 @@
     <div class="container mx-auto h-full flex flex-1 justify-center items-center">
         <div class="w-full max-w-lg">
           <div class="leading-loose">
+            @if(errorMessage){
+              <app-error-message [errorMessage]="errorMessage"></app-error-message>
+            }
             <form [formGroup]="loginForm" class="max-w-sm m-4 p-10 bg-white bg-opacity-25 rounded shadow-xl">
                 <p class="text-white text-center text-lg font-bold">Iniciar sesión</p>
                   <div class="">
@@ -29,10 +32,3 @@
         </div>
       </div>
     </div>
-    <style>
-      .login{
-      background: url('../../../../assets/bg_crossfit.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    </style>
