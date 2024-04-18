@@ -1,0 +1,55 @@
+<!-- component -->
+<!-- This is an example component -->
+<div class="h-screen font-sans login bg-gray-600">
+
+    <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+  
+        <div class="w-full max-w-lg">
+          <div class="leading-loose">
+            
+            <form [formGroup]="newWorkoutForm" class="max-w-sm m-4 p-10 bg-white bg-opacity-25 rounded shadow-xl">
+                <p class="text-white text-center text-lg font-bold">Añadir entreno</p>
+                <div class="mt-2">
+                  <label class="block  text-sm text-white" for="name">Nombre</label>
+                   <input formControlName="name" class="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
+                    type="text" id="name" placeholder="Introduce tu nombre" arial-label="firstname" required>
+                </div>
+
+                <div class="mt-2">
+                    <label class="block  text-sm text-white" for="firstname">Movimientos</label>
+                     <input disabled class="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
+                      type="text" id="firstname" placeholder="Introduce movimientos" arial-label="firstname" required>
+                  </div>
+
+                  <div class="mt-2">
+                    <label class="block  text-sm text-white" for="description">Descripción</label>
+                     <textarea formControlName="description" class="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
+                      type="text" id="description" placeholder="Introduce los detalles del entreno" arial-label="description" required></textarea>
+                  </div>
+
+                <div class="mt-2">
+                    <label class="block  text-sm text-white" for="intensity">Categoría</label>
+                     <select formControlName="intensity" class="w-full px-5 py-1 text-gray-700 bg-gray-300 rounded focus:outline-none focus:bg-white"
+                      type="text" id="intensity" arial-label="intensity" required>
+                      <option selected disabled value="">Introduce una categoría</option>
+                        @for (intensity of intensities; track intensity) {
+                          <option value="{{intensity}}">{{intensity}}</option>
+                        }
+                      
+    
+                     </select>
+                  </div>
+    
+                  <div class="mt-4 flex justify-center">
+                    <button 
+                    (click)="addWorkout()"
+                      class="px-4 py-1 text-white font-light tracking-wider bg-green-600 hover:bg-green-800 rounded"
+                      type="submit">Crear</button>
+                  </div>
+    
+            </form>
+    
+          </div>
+        </div>
+      </div>
+    </div>

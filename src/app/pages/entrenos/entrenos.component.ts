@@ -21,12 +21,12 @@ export class EntrenosComponent {
 
   errorMessage?:string;
   workouts?: Observable<Workout[]>;
-  decodeToken?:JwtPayload;
+  idToken?:number
   user?:User;
 
   ngOnInit(): void {
-    
-    this.workouts = this.workoutService.getAllWorkout()
+    this.idToken = this.jwtService.getId() ?? 0;
+    this.workouts = this.workoutService.getAllWorkout(this.idToken)
               .pipe(catchError((error:string)=> {
                 this.errorMessage = error;
                 return EMPTY;

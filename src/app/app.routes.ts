@@ -9,6 +9,7 @@ import { AddMovementFormComponent } from './pages/movements/add-movement-form/ad
 import { MyDataComponent } from './pages/users/my-data/my-data.component';
 import { authRotersGuard } from './guards/auth-roters.guard';
 import { adminAuthGuard } from './guards/admin-auth.guard';
+import { AddWorkoutComponent } from './pages/workouts/add-workout/add-workout.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/inicio', pathMatch: 'full'},
@@ -19,5 +20,7 @@ export const routes: Routes = [
     {path: 'usuarios', component: UsersComponent, canActivate: [authRotersGuard, adminAuthGuard]},
     {path: 'movimientos', component: MovementsComponent, canActivate: [authRotersGuard, adminAuthGuard]},
     {path: 'movimiento-nuevo', component: AddMovementFormComponent, canActivate: [authRotersGuard, adminAuthGuard]},
-    {path: 'mis-datos', component: MyDataComponent, canActivate: [authRotersGuard]}
+    {path: 'mis-datos', component: MyDataComponent, canActivate: [authRotersGuard]},
+    {path: 'entrenamiento-nuevo', component: AddWorkoutComponent, canActivate: [authRotersGuard]}
+
 ];

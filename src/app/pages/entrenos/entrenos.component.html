@@ -1,10 +1,17 @@
 <div class="m-2">
+    <div class="sm:flex sm:items-end sm:justify-end">
+        <a
+          href="/entrenamiento-nuevo"
+          class="block bg-green-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-green-400"
+        >
+          Añadir entreno
+        </a>
+      </div>
     @if(workouts | async; as allWorkouts){     
             @for (workout of allWorkouts; track workout.id) {
                 <app-training-card [workout]="workout"></app-training-card>
             }
 
     }
-    <p></p>
 
 </div>

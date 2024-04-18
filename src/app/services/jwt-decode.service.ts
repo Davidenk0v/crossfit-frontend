@@ -8,10 +8,15 @@ export class JwtDecodeService {
 
   constructor() { }
 
+  token = sessionStorage.getItem('token') ?? ''
    
+  decodedToken = jwtDecode(this.token) as JwtPayload;
 
-  public decodeToken(){
-    let token = sessionStorage.getItem('token') ?? ''
-     return jwtDecode(token) as JwtPayload;
+   getUsername(){
+      return this.decodedToken.sub;
   }
+
+  getId(){
+    return this.decodedToken.id;
+}
 }

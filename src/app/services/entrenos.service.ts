@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { evironment } from '../../environment/environment';
 import { Workout } from '../interfaces/Workout';
-import { UsersService } from './user/users.service';
-import { JwtDecodeService } from './jwt-decode.service';
+import { WorkoutRequest } from '../interfaces/WorkoutRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +14,8 @@ export class EntrenosService {
 
   errorMessage?:string;
 
-  getAllWorkout(): Observable<Workout[]> {
-    return this.http.get<Workout[]>(`${evironment.urlApi}/workouts/`)
+  getAllWorkout(id:number): Observable<Workout[]> {
+    return this.http.get<Workout[]>(`${evironment.urlApi}/workouts/user/${id}`)
     .pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.error instanceof ErrorEvent) {
@@ -26,6 +25,22 @@ export class EntrenosService {
         }
 
         return throwError(() => this.errorMessage);
+      })
+    );
+  }
+
+  addWorkout(credentials:WorkoutRequest): Observable<any> {
+    return this.http.post<any>(`${evironment.urlApi}/workouts/`, credentials).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = '';
+
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error code: ${error.status}, message: ${error.message}`;
+        }
+
+        return throwError(() => errorMessage);
       })
     );
   }

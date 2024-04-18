@@ -1,9 +1,6 @@
-export interface Workout{
-    id:number;
+export interface WorkoutRequest{
     name:string,
     intensity:string;
     workoutMovements:[];
-    users:[];
-    scores:[];
     description:string;
 }

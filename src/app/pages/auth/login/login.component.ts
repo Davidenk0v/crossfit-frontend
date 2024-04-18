@@ -35,6 +35,7 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
+          console.log(userData.token)
         },
         error: (errorData)=>{
           this.errorMessage=errorData;
