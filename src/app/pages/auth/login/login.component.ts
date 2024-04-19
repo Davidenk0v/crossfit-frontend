@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { LoginService } from '../../../services/auth/login.service';
 import { LoginRequest } from '../../../interfaces/LoginRequest';
 import { ErrorMessageComponent } from '../../../components/alerts/error-message/error-message.component';
@@ -8,7 +8,7 @@ import { ErrorMessageComponent } from '../../../components/alerts/error-message/
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, ErrorMessageComponent],
+  imports: [ReactiveFormsModule, ErrorMessageComponent, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -35,7 +35,6 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData) => {
-          console.log(userData.token)
         },
         error: (errorData)=>{
           this.errorMessage=errorData;

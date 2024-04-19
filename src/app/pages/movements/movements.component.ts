@@ -5,12 +5,12 @@ import { AsyncPipe } from '@angular/common';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { Movement } from '../../interfaces/Movement';
 import { MovementService } from '../../services/movements/movement.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movements',
   standalone: true,
-  imports: [AsyncPipe,ErrorMessageComponent, SuccessMessageComponent],
+  imports: [AsyncPipe,ErrorMessageComponent, SuccessMessageComponent, RouterModule],
   templateUrl: './movements.component.html',
   styleUrl: './movements.component.css'
 })

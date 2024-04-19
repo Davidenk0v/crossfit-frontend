@@ -5,21 +5,23 @@ import { EMPTY, Observable, catchError } from 'rxjs';
 import { Workout } from '../../interfaces/Workout';
 import { AsyncPipe } from '@angular/common';
 import { JwtDecodeService } from '../../services/jwt-decode.service';
-import { JwtPayload } from '../../interfaces/JwtPayload';
 import { User } from '../../interfaces/User';
+import { ErrorMessageComponent } from '../../components/alerts/error-message/error-message.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-entrenos',
   standalone: true,
-  imports: [AsyncPipe, TrainingCardComponent],
+  imports: [AsyncPipe, TrainingCardComponent, ErrorMessageComponent, RouterModule],
   templateUrl: './entrenos.component.html',
   styleUrl: './entrenos.component.css'
 })
 export class EntrenosComponent {
 
   constructor(private workoutService:EntrenosService, private jwtService:JwtDecodeService){}
-
+  noWorkoutMessage = "No hay entrenos aún";
   errorMessage?:string;
+  successMessage?:string;
   workouts?: Observable<Workout[]>;
   idToken?:number
   user?:User;
@@ -32,4 +34,5 @@ export class EntrenosComponent {
                 return EMPTY;
               }));
   }
+
 }

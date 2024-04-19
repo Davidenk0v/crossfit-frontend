@@ -43,7 +43,6 @@ export class AddMovementFormComponent {
         .addMovement(this.newMovementForm.value as NewMovementRequest)
         .subscribe({
           next: (userData) => {
-            console.log(userData);
           },
           error: (errorData) => {
             this.errorMessage = errorData;

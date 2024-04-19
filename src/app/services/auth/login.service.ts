@@ -20,6 +20,7 @@ export class LoginService {
   constructor(private http:HttpClient, private router:Router) {
     this.currentUserLoginOn=new BehaviorSubject<boolean>(sessionStorage.getItem('token') != null);
     this.currentToken = new BehaviorSubject<string>(sessionStorage.getItem('token') ?? '');
+    this.currentUserAdmin = new BehaviorSubject<boolean>(false);
    }
 
    login(credentials:LoginRequest):Observable<any>{
@@ -28,13 +29,10 @@ export class LoginService {
         sessionStorage.setItem("token", userData.token);
         this.currentToken.next(userData.body);
         this.currentUserLoginOn.next(true);
-        if(this.currentToken.value){
-          let token = this.currentToken.value;
-          const {authorities} = jwtDecode(token) as JwtPayload;
+          const {authorities} = jwtDecode(userData.token) as JwtPayload;
           if(authorities == 'ROLE_ADMIN'){
             this.currentUserAdmin.next(true);
           }
-        }
       }),
       map((userData)=> userData),
       catchError(this.handleError)
@@ -44,6 +42,7 @@ export class LoginService {
   logout(){
     sessionStorage.removeItem("token");
     this.currentUserLoginOn.next(false);
+    this.currentUserAdmin.next(false);
     this.router.navigateByUrl('/login')
   }
 

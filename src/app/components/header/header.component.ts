@@ -3,11 +3,12 @@ import { LoginService } from '../../services/auth/login.service';
 import { RegisterService } from '../../services/auth/register.service';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from '../../interfaces/JwtPayload';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

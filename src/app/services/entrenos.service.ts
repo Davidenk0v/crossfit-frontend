@@ -45,4 +45,20 @@ export class EntrenosService {
     );
   }
 
+  deleteWorkout(id: number): Observable<any> {
+    return this.http.delete<any>(`${evironment.urlApi}/workouts/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = '';
+
+        if (error.error instanceof ErrorEvent) {
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          errorMessage = `Error code: ${error.status}, message: ${error.message}`;
+        }
+
+        return throwError(() => errorMessage);
+      })
+    );
+  }
+
 }

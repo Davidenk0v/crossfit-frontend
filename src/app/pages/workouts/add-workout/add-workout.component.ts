@@ -25,7 +25,7 @@ export class AddWorkoutComponent {
   constructor(private jwtService:JwtDecodeService, private router:Router, private formBuilder:FormBuilder, private categoryService:CategoryService, private workoutService:EntrenosService){}
 
   newWorkoutForm = this.formBuilder.group({
-    idUser:[this.jwtService.getId],
+    idUser:[this.jwtService.getId()],
     name: ['', [Validators.required]],
     intensity: ['', [Validators.required]],
     description: ['', [Validators.required]]
@@ -37,7 +37,6 @@ export class AddWorkoutComponent {
         .addWorkout(this.newWorkoutForm.value as WorkoutRequest)
         .subscribe({
           next: (userData) => {
-            console.log(userData);
           },
           error: (errorData) => {
             this.errorMessage = errorData;

@@ -1,12 +1,12 @@
-<article class="flex bg-white transition hover:shadow-xl">
+<article class="flex bg-white transition hover:shadow-xl mb-4">
     <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
       <time
         datetime="2022-10-10"
         class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900"
       >
-        <span>2022</span>
+        <span>2024</span>
         <span class="w-px flex-1 bg-gray-900/10"></span>
-        <span>Oct 10</span>
+        <span>April 19</span>
       </time>
     </div>
   
@@ -39,20 +39,20 @@
           {{workout?.intensity}}
         </p>
         <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700 font-extrabold">
-          Mi resultado:
+          Descripción:
         </p>
         <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
-          Aqui va resultado
+          {{workout?.description}}
         </p>
       </div>
   
       <div class="sm:flex sm:items-end sm:justify-end">
-        <a
-          href="#"
-          class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
+        <button
+          (click)="deleteMovementById(workout?.id ?? 0)"
+          class="block bg-red-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"
         >
-          Editar
-        </a>
+          Eliminar
+        </button>
       </div>
     </div>
   </article>
