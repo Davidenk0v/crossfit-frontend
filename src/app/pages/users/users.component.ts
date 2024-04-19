@@ -40,6 +40,7 @@ export class UsersComponent {
       },
       complete: () => {
         this.users = this.userService.getAllUsers();
+        this.router.navigateByUrl('/login')
       },
     });
   }
